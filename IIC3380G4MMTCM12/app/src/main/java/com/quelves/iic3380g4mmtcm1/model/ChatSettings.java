@@ -12,6 +12,7 @@ public class ChatSettings extends BaseObservable implements Parcelable {
     private String mUsername;
     private String mChatRoom;
 
+
     public ChatSettings(String username, String chatRoom) {
         mUsername = username;
         mChatRoom = chatRoom;

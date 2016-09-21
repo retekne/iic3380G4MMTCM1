@@ -50,13 +50,16 @@ import java.util.List;
 public class ChatActivity extends Activity {
     private static final String TAG = "Chat";
     private static final String KEY_SETTINGS = "settings";
+    private static final String KEY_SETTINGS2 = "settings2";
     private static final String FIREBASE_KEY_ROOMS = "chats";
 
     private ActivityChatBinding mBinding;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mChatRoomReference;
+    private DatabaseReference mChatRoomReference2;
 
     private ChatSettings mChatSettings;
+    private ChatSettings mChatSettings2;
     private boolean mInitialized;
 
     private List<ChatMessage> mMessageList;
@@ -222,11 +225,42 @@ public class ChatActivity extends Activity {
             mInitialized = true;
             mChatRoomReference.addChildEventListener(new OnMessagesChanged());
             Log.i(TAG, "Chat initialized");
+
         }
+
+
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
             Log.i(TAG, "Could not initialize chat.");
+            // TODO: Inform the user about the error and handle gracefully.
+
+        }
+    }
+
+    public class OnInitialDataLoaded2 implements ValueEventListener {
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                ChatMessage chatMessage = child.getValue(ChatMessage.class);
+                mMessageList.add(chatMessage);
+            }
+            // Update the UI
+            mAdapter.notifyDataSetChanged();
+
+            scrollToBottom();
+
+            mInitialized = true;
+            mChatRoomReference2.addChildEventListener(new OnMessagesChanged());
+            Log.i(TAG, "Chat initialized 2");
+        }
+
+
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.i(TAG, "Could not initialize chat 2.");
             // TODO: Inform the user about the error and handle gracefully.
 
         }
@@ -267,9 +301,10 @@ public class ChatActivity extends Activity {
 
     // Static helpers
 
-    public static Intent getIntent(Context context, ChatSettings settings) {
+    public static Intent getIntent(Context context, ChatSettings settings, ChatSettings settings2) {
         Intent intent = new Intent(context, ChatActivity.class);
         intent.putExtra(KEY_SETTINGS, settings);
+        intent.putExtra(KEY_SETTINGS2, settings2);
         return intent;
     }
 
@@ -282,7 +317,7 @@ public class ChatActivity extends Activity {
 
         // We retrieve the chat settings (username and chat room name)
         mChatSettings = getIntent().getParcelableExtra(KEY_SETTINGS);
-
+        mChatSettings2 = getIntent().getParcelableExtra(KEY_SETTINGS2);
         TextView tvUser = (TextView)findViewById(R.id.tvUser);
         tvUser.setText(mChatSettings.getUsername());
 
@@ -299,6 +334,9 @@ public class ChatActivity extends Activity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mChatRoomReference = mFirebaseDatabase.getReference(FIREBASE_KEY_ROOMS).child(mChatSettings.getChatRoom());
         mChatRoomReference.addListenerForSingleValueEvent(new OnInitialDataLoaded());
+
+        mChatRoomReference2 = mFirebaseDatabase.getReference(FIREBASE_KEY_ROOMS).child(mChatSettings2.getChatRoom());
+        mChatRoomReference2.addListenerForSingleValueEvent(new OnInitialDataLoaded());
     }
 
     /**
