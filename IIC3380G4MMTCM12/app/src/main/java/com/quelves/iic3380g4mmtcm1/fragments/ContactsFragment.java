@@ -1,4 +1,4 @@
-package com.quelves.iic3380g4mmtcm1;
+package com.quelves.iic3380g4mmtcm1.fragments;
 
 
 import android.Manifest;
@@ -24,6 +24,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.quelves.iic3380g4mmtcm1.R;
+import com.quelves.iic3380g4mmtcm1.model.User;
+
 import java.util.ArrayList;
 
 
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 public class ContactsFragment extends Fragment {
 
     public static final String TAG = "contacts_fragment";
+
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 101;
 
     private ArrayList<User> mContacts;
@@ -44,9 +48,7 @@ public class ContactsFragment extends Fragment {
         void onContactSelected(User user);
     }
 
-    public ContactsFragment() {
-        // Required empty public constructor
-    }
+    public ContactsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,6 +130,11 @@ public class ContactsFragment extends Fragment {
         if(id == R.id.action_add_contact){
             Intent intent = new Intent(Intent.ACTION_INSERT,ContactsContract.Contacts.CONTENT_URI);
             startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_reflesh_contact) {
+            showContacts();
             return true;
         }
 

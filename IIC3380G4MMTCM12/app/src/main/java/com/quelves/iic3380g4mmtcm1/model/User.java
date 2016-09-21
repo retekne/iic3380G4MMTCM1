@@ -1,4 +1,4 @@
-package com.quelves.iic3380g4mmtcm1;
+package com.quelves.iic3380g4mmtcm1.model;
 
 /**
  * Created by quelves on 9/20/16.

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "67324832767",
+    "firebase_url": "https://iic3380g4mmtcm1.firebaseio.com",
+    "project_id": "iic3380g4mmtcm1",
+    "storage_bucket": "iic3380g4mmtcm1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67324832767:android:294c686cdf95452a",
+        "android_client_info": {
+          "package_name": "com.quelves.iic3380g4mmtcm1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67324832767-sjnjgkoc23md4ljeolgupirfg55leqtl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quelves.iic3380g4mmtcm1",
+            "certificate_hash": "EE1A9DCB2A31BF26B5568F0C3820CAA44DE769FA"
+          }
+        },
+        {
+          "client_id": "67324832767-q027roe4a3mvku41hptujorv9h5uco7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkDXqyH6GrsRXcfB6gw_ai8B0i0XX-16M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67324832767-q027roe4a3mvku41hptujorv9h5uco7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
