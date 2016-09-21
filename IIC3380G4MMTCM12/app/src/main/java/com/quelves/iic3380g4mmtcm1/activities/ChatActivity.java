@@ -7,6 +7,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -18,6 +19,8 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -64,6 +67,7 @@ public class ChatActivity extends Activity {
 
     private List<ChatMessage> mMessageList;
     private ArrayAdapter<ChatMessage> mAdapter;
+    private ChatMessagesAdapter mChatMessagesAdapter;
 
     private Intent cameraIntent;
 
@@ -318,12 +322,15 @@ public class ChatActivity extends Activity {
         // We retrieve the chat settings (username and chat room name)
         mChatSettings = getIntent().getParcelableExtra(KEY_SETTINGS);
         mChatSettings2 = getIntent().getParcelableExtra(KEY_SETTINGS2);
+
         TextView tvUser = (TextView)findViewById(R.id.tvUser);
         tvUser.setText(mChatSettings.getUsername());
 
         // List configuration
         mMessageList = new ArrayList<>();
-        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mMessageList);
+        //mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mMessageList);
+        //mBinding.listView.setAdapter(mAdapter);
+        mAdapter = new ChatMessagesAdapter(getBaseContext(), android.R.layout.simple_list_item_1, mMessageList);
         mBinding.listView.setAdapter(mAdapter);
 
         // Data binding initialization
@@ -361,5 +368,52 @@ public class ChatActivity extends Activity {
     private void scrollToBottom() {
         mBinding.listView.smoothScrollToPosition(mAdapter.getCount() - 1);
     }
+
+
+    /**
+     * adapter
+     */
+    private class ChatMessagesAdapter extends ArrayAdapter<ChatMessage> {
+        private List<ChatMessage> mChatMessages;
+        private LayoutInflater mLayoutInflater;
+
+        public ChatMessagesAdapter(Context context, int resource, List<ChatMessage> chatMessages) {
+            super(context, resource, chatMessages);
+            mChatMessages = chatMessages;
+            mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        public void add(ChatMessage chatMessage) {
+            mChatMessages.add(chatMessage);
+        }
+
+        /**
+         * Return the view of a row.
+         */
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            // Recycle views. Inflate the view only if its not already inflated.
+            if (view == null) {
+                view = mLayoutInflater.inflate(R.layout.chat_list_item, parent, false);
+            }
+            ChatMessage message = mChatMessages.get(position);
+
+
+            TextView tvMessage = (TextView) view.findViewById(R.id.tvMessage);
+
+            if (message.getAuthor().equals(mChatSettings.getUsername())) {
+                tvMessage.setBackgroundColor(Color.GREEN);
+                tvMessage.setGravity(Gravity.RIGHT);
+            }
+
+            tvMessage.setText(message.getMessage());
+
+
+            return view;
+        }
+    }
+
+
 }
 
