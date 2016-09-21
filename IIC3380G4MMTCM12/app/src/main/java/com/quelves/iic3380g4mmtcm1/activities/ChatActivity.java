@@ -33,7 +33,7 @@ import java.util.List;
 public class ChatActivity extends Activity {
     private static final String TAG = "Chat";
     private static final String KEY_SETTINGS = "settings";
-    private static final String FIREBASE_KEY_ROOMS = "rooms";
+    private static final String FIREBASE_KEY_ROOMS = "chats";
 
     private ActivityChatBinding mBinding;
     private FirebaseDatabase mFirebaseDatabase;
