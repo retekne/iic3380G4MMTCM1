@@ -336,7 +336,7 @@ public class ChatActivity extends Activity {
         mChatRoomReference.addListenerForSingleValueEvent(new OnInitialDataLoaded());
 
         mChatRoomReference2 = mFirebaseDatabase.getReference(FIREBASE_KEY_ROOMS).child(mChatSettings2.getChatRoom());
-        mChatRoomReference2.addListenerForSingleValueEvent(new OnInitialDataLoaded());
+        mChatRoomReference2.addListenerForSingleValueEvent(new OnInitialDataLoaded2());
     }
 
     /**
