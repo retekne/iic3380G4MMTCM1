@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -45,6 +46,7 @@ public class ChatActivity extends Activity {
     private List<ChatMessage> mMessageList;
     private ArrayAdapter<ChatMessage> mAdapter;
 
+
     // Inner classes implementations
 
     public class ChatActivityHandler {
@@ -65,6 +67,18 @@ public class ChatActivity extends Activity {
 
         public void onBackToContacts() {
             startActivity(MainActivity.getIntent(ChatActivity.this));
+        }
+
+        public void onShoeAttachFile() {
+
+        }
+
+        public void onOpenCamera() {
+
+        }
+
+        public void onOpenMic() {
+
         }
     }
 
@@ -161,6 +175,9 @@ public class ChatActivity extends Activity {
 
         // We retrieve the chat settings (username and chat room name)
         mChatSettings = getIntent().getParcelableExtra(KEY_SETTINGS);
+
+        TextView tvUser = (TextView)findViewById(R.id.tvUser);
+        tvUser.setText(mChatSettings.getUsername());
 
         // List configuration
         mMessageList = new ArrayList<>();

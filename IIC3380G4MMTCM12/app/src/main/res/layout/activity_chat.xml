@@ -20,7 +20,6 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> handler.onBackToContacts()}"
                 android:src="@drawable/ic_arrow_back_black_24dp"/>
             <ImageButton
                 android:layout_width="wrap_content"
@@ -37,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:onClick="@{() -> handler.onBackToContacts()}"
+                android:onClick="@{() -> handler.onShoeAttachFile()}"
                 android:src="@drawable/ic_attachment_black_24dp"/>
 
         </LinearLayout>
@@ -71,13 +70,13 @@
                 android:id="@+id/ibCamera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> handler.onSendMessage(message)}"
+                android:onClick="@{() -> handler.onOpenCamera()}"
                 android:src="@drawable/ic_photo_camera_black_24dp" />
             <ImageButton
                 android:id="@+id/ibMicrofono"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> handler.onSendMessage(message)}"
+                android:onClick="@{() -> handler.onOpenCamera()}"
                 android:src="@drawable/ic_mic_black_24dp" />
         </LinearLayout>
     </LinearLayout>

@@ -46,6 +46,6 @@ public class ChatMessage {
 
     @Override
     public String toString() {
-        return mAuthor + ": " + mMessage;
+        return mMessage;
     }
 }

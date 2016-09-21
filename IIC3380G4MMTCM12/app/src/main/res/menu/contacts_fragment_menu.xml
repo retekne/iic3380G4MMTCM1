@@ -10,5 +10,5 @@
         android:id="@+id/action_reflesh_contact"
         android:orderInCategory="100"
         app:showAsAction="collapseActionView"
-        android:title="Refreshcontact"/>
+        android:title="Refresh contact"/>
 </menu>
