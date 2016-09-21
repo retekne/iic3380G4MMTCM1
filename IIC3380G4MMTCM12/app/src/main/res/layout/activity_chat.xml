@@ -21,13 +21,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> handler.onBackToContacts()}"
-                android:src="@drawable/ic_chevron_left_black_24dp"/>
-            <TextView
-                android:id="@+id/tvUser"
+                android:src="@drawable/ic_arrow_back_black_24dp"/>
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:src="@drawable/ic_android_black_24dp"/>
+            <TextView
+                android:id="@+id/tvUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_weight="1"
                 android:text="User"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:onClick="@{() -> handler.onBackToContacts()}"
+                android:src="@drawable/ic_attachment_black_24dp"/>
 
         </LinearLayout>
 
@@ -56,6 +67,18 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> handler.onSendMessage(message)}"
                 android:src="@drawable/ic_send_black_24dp" />
+            <ImageButton
+                android:id="@+id/ibCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> handler.onSendMessage(message)}"
+                android:src="@drawable/ic_photo_camera_black_24dp" />
+            <ImageButton
+                android:id="@+id/ibMicrofono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> handler.onSendMessage(message)}"
+                android:src="@drawable/ic_mic_black_24dp" />
         </LinearLayout>
     </LinearLayout>
 </layout>
