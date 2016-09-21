@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements ContactsFragment.
 
     private void startChat(User user) {
         TelephonyManager tMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        String mPhoneNumber = tMgr.getLine1Number()+" ";
-        ChatSettings chatSettings = new ChatSettings(user.mName, mPhoneNumber.replace(" ", "") + "-" + user.mPhoneNumber+"".replace(" ", ""));
+        String mPhoneNumber = tMgr.getDeviceId()+" ".replace(" ","");
+        ChatSettings chatSettings = new ChatSettings(user.mName, mPhoneNumber + "-" + user.mPhoneNumber.replace(" ",""));
         startActivity(ChatActivity.getIntent(MainActivity.this, chatSettings));
     }
 

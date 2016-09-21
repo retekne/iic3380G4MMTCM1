@@ -62,6 +62,8 @@ public class ChatActivity extends Activity {
     private List<ChatMessage> mMessageList;
     private ArrayAdapter<ChatMessage> mAdapter;
 
+    private Intent cameraIntent;
+
 
     // Inner classes implementations
 
@@ -91,7 +93,7 @@ public class ChatActivity extends Activity {
         }
 
         public void onOpenCamera() {
-            dispatchTakePictureIntent();
+            dispatchTakePictureIntent1();
         }
 
         public void onOpenMic() {
@@ -105,25 +107,39 @@ public class ChatActivity extends Activity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
 
+    private void dispatchTakePictureIntent1() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Log.i(TAG, "Camera Intent  1");
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
+            Log.i(TAG, "Camera Intent  2");
             File photoFile = null;
             try {
+                Log.i(TAG, "Camera Intent  3");
                 photoFile = createImageFile();
+                Log.i(TAG, photoFile.getName());
             } catch (IOException ex) {
                 // Error occurred while creating the File
-
+                Log.i(TAG, "Camera Intent  3");
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
+                Log.i(TAG, "Camera Intent  5");
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                Log.i(TAG, "Camera Intent  6");
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                Log.i(TAG, "Camera Intent  7");
             }
         }
     }
@@ -138,6 +154,7 @@ public class ChatActivity extends Activity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "Camera onActivityResult  1");
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
